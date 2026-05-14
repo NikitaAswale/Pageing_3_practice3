@@ -52,6 +52,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 fun UserUI(viewModel: UserViewModel = viewModel()) {
 
     val character = viewModel.character.collectAsLazyPagingItems()
+
     Scaffold(topBar = {
         TopAppBar(
             title = {
@@ -228,16 +229,18 @@ fun UserUI(viewModel: UserViewModel = viewModel()) {
 @Composable
 fun UsersList(character: Results) {
     Card(
+        modifier = Modifier.fillMaxWidth()
+            .padding(20.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(
             Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(12.dp)
         ) {
             Row(
                 Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -253,47 +256,56 @@ fun UsersList(character: Results) {
                     color = Color.Blue
                 )
             }
-            Row {
+            Spacer(Modifier.height(8.dp))
+
+            Row (Modifier.fillMaxWidth(),
+               // verticalAlignment = Alignment.CenterVertically
+            ){
                 Text(
                     "${character.status}",
-                    fontSize = 18.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Gray,
+                    color = Color.DarkGray,
                     modifier = Modifier
-                        .padding(8.dp)
                         .clip(
-                            RoundedCornerShape(12.dp)
+                            RoundedCornerShape(16.dp)
                         )
+                        .background(Color(0xFFBBDEFB))
+                        .padding(4.dp)
                 )
                 Spacer(Modifier.width(12.dp))
 
                 Text(
-                    "Location:",
+                    "Location: ",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Gray
+                    fontSize = 16.sp,
+                    color = Color.DarkGray
                 )
                 Text(
-                    "\n ${character.location.name}",
-                    fontSize = 18.sp,
+                    "${character.location.name}",
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.LightGray
+                    color = Color.Gray
                 )
             }
 
-            Text(
-                "Origin",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Gray
-            )
-            Text(
-                "\n ${character.species}",
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp,
-                color = Color.LightGray
-            )
+            Spacer(Modifier.height(8.dp))
+
+            Row(Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    "Origin: ",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.DarkGray
+                )
+                Text(
+                    "${character.species}",
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp,
+                    color = Color.Gray
+                )
+            }
         }
     }
-    Spacer(Modifier.height(10.dp))
 }

@@ -8,8 +8,8 @@ data class Users(
 data class Info(
     val count : Int,
     val pages : Int,
-    val next : String,
-    val prev : String
+    val next: String?,
+    val prev : String?
 )
 
 data class Results(
@@ -23,7 +23,7 @@ data class Results(
     val location : Location,
     val image : String,
     val url : String,
-    val created : Int
+    val created : String
 )
 
 data class Origin(
